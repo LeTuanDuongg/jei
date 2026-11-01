@@ -1,0 +1,209 @@
+[mod]
+id = "jei"
+version = "0.1.0"
+priority = 100
+
+[[module]]
+id = "runtime"
+file = "crates/horizon-client/src/game.rs"
+name = "port_jei"
+source = "runtime.rs"
+
+[[module]]
+id = "game_side"
+file = "crates/horizon-client/src/game.rs"
+name = "port_jei_game"
+source = "game_side.rs"
+
+[[injection]]
+id = "list"
+kind = "HEAD"
+target = "horizon_client::game::native_hooks::Game<'_>::native_mods"
+helper = "list.rs"
+bindings = [
+  { name = "mods", ty = "&mut Vec<crate::game::native_hooks::NativeMod>", value = "&mut *mods" },
+]
+
+[[injection]]
+id = "command"
+kind = "HEAD"
+target = "horizon_client::game::native_hooks::Game<'_>::native_command"
+helper = "command.rs"
+bindings = [
+  { name = "game", ty = "&mut crate::game::Game<'_>", value = "&mut *self" },
+  { name = "command", ty = "&str", value = "command" },
+  { name = "ran", ty = "&mut bool", value = "&mut *ran" },
+]
+
+[[injection]]
+id = "key"
+kind = "HEAD"
+target = "horizon_client::game::native_hooks::Game<'_>::native_key"
+helper = "key.rs"
+bindings = [
+  { name = "game", ty = "&mut crate::game::Game<'_>", value = "&mut *self" },
+  { name = "key", ty = "&str", value = "key" },
+  { name = "pressed", ty = "bool", value = "pressed" },
+]
+
+[[injection]]
+id = "settings"
+kind = "HEAD"
+target = "horizon_client::game::native_hooks::Game<'_>::native_settings"
+helper = "settings.rs"
+bindings = [
+  { name = "game", ty = "&mut crate::game::Game<'_>", value = "&mut *self" },
+  { name = "mod_id", ty = "&str", value = "mod_id" },
+  { name = "buttons", ty = "&mut Vec<String>", value = "&mut *buttons" },
+]
+
+[[injection]]
+id = "click"
+kind = "HEAD"
+target = "horizon_client::game::native_hooks::Game<'_>::native_settings_click"
+helper = "click.rs"
+bindings = [
+  { name = "game", ty = "&mut crate::game::Game<'_>", value = "&mut *self" },
+  { name = "mod_id", ty = "&str", value = "mod_id" },
+  { name = "button", ty = "usize", value = "button" },
+]
+
+# Off: @Inject(HEAD) on AbstractContainerScreen.extractCarriedItem (AbstractContainerScreenMixin.drawForeground)
+#   No Horizon function mapped for AbstractContainerScreen.extractCarriedItem (run `match`, or map it in a --mappings file).
+# [[injection]]
+# id = "abstract-container-screen-mixin-draw-foreground"
+# kind = "HEAD"
+# target = "TODO"
+
+# Off: @Inject(INVOKE) on AmecsKeyModifiersEarlyInit.onInitialize (AmecsKeyModifiersEarlyInitMixin.beforeSeal)
+#   No Horizon function mapped for AmecsKeyModifiersEarlyInit.onInitialize (run `match`, or map it in a --mappings file).
+# [[injection]]
+# id = "amecs-key-modifiers-early-init-mixin-before-seal"
+# kind = "BEFORE_CALL"
+# target = "TODO"
+
+# Off: @Inject(RETURN) on ClientPacketListener.handleUpdateRecipes (ClientPacketListenerRecipeUpdateMixin.handleUpdateRecipes)
+#   No Horizon function mapped for ClientPacketListener.handleUpdateRecipes (run `match`, or map it in a --mappings file).
+# [[injection]]
+# id = "client-packet-listener-recipe-update-mixin-handle-update-recipes"
+# kind = "RETURN"
+# target = "TODO"
+
+# Off: @ModifyVariable(STORE) on EffectsInInventory.extractRenderState (EffectsInInventoryMixin.modifyEffectWidth)
+#   No Horizon function mapped for EffectsInInventory.extractRenderState (run `match`, or map it in a --mappings file).
+# [[injection]]
+# id = "effects-in-inventory-mixin-modify-effect-width"
+# kind = "MODIFY_VARIABLE"
+# target = "TODO"
+
+# Off: @Inject(HEAD) on GuiGraphicsExtractor.setTooltipForNextFrameInternal (GuiGraphicsExtractorMixin.jei$setTooltipForNextFrameInternal)
+#   No Horizon function mapped for GuiGraphicsExtractor.setTooltipForNextFrameInternal (run `match`, or map it in a --mappings file).
+# [[injection]]
+# id = "gui-graphics-extractor-mixin-set-tooltip-for-next-frame-internal"
+# kind = "HEAD"
+# target = "TODO"
+
+# Off: @Inject(HEAD) on GuiGraphicsExtractor.componentHoverEffect (GuiGraphicsExtractorMixin.jei$componentHoverEffect)
+#   No Horizon function mapped for GuiGraphicsExtractor.componentHoverEffect (run `match`, or map it in a --mappings file).
+# [[injection]]
+# id = "gui-graphics-extractor-mixin-component-hover-effect"
+# kind = "HEAD"
+# target = "TODO"
+
+# Off: @WrapOperation(INVOKE) on KeyEntry.lambda$new$2 (KeyBindsListEntryMixin.resetJeiModifiers)
+#   No Horizon function mapped for KeyEntry.lambda$new$2 (run `match`, or map it in a --mappings file).
+# [[injection]]
+# id = "key-binds-list-entry-mixin-reset-jei-modifiers"
+# kind = "WRAP_OPERATION"
+# target = "TODO"
+
+# Off: @Inject(HEAD) on KeyBindsScreen.keyPressed (KeyBindsScreenMixin.bindJeiKeyboard)
+#   No Horizon function mapped for KeyBindsScreen.keyPressed (run `match`, or map it in a --mappings file).
+# [[injection]]
+# id = "key-binds-screen-mixin-bind-jei-keyboard"
+# kind = "HEAD"
+# target = "TODO"
+
+# Off: @Inject(HEAD) on KeyBindsScreen.mouseClicked (KeyBindsScreenMixin.bindJeiMouse)
+#   No Horizon function mapped for KeyBindsScreen.mouseClicked (run `match`, or map it in a --mappings file).
+# [[injection]]
+# id = "key-binds-screen-mixin-bind-jei-mouse"
+# kind = "HEAD"
+# target = "TODO"
+
+# Off: @WrapOperation(INVOKE) on KeyBindsScreen.lambda$addFooter$0 (KeyBindsScreenMixin.resetJeiModifiers)
+#   No Horizon function mapped for KeyBindsScreen.lambda$addFooter$0 (run `match`, or map it in a --mappings file).
+# [[injection]]
+# id = "key-binds-screen-mixin-reset-jei-modifiers"
+# kind = "WRAP_OPERATION"
+# target = "TODO"
+
+# Off: @Inject(HEAD) on KeyboardHandler.charTyped (KeyboardHandlerMixin.beforeCharTypedEvent)
+#   No Horizon function mapped for KeyboardHandler.charTyped (run `match`, or map it in a --mappings file).
+# [[injection]]
+# id = "keyboard-handler-mixin-before-char-typed-event"
+# kind = "HEAD"
+# target = "TODO"
+
+# Off: @Inject(TAIL) on KeyboardHandler.charTyped (KeyboardHandlerMixin.afterCharTypedEvent)
+#   No Horizon function mapped for KeyboardHandler.charTyped (run `match`, or map it in a --mappings file).
+# [[injection]]
+# id = "keyboard-handler-mixin-after-char-typed-event"
+# kind = "RETURN"
+# target = "TODO"
+
+# Off: @ModifyVariable(HEAD) on KeyboardHandler.submitPreeditEvent (KeyboardHandlerMixin.redirectPreeditToFocusedSearchField)
+#   No Horizon function mapped for KeyboardHandler.submitPreeditEvent (run `match`, or map it in a --mappings file).
+# [[injection]]
+# id = "keyboard-handler-mixin-redirect-preedit-to-focused-search-field"
+# kind = "MODIFY_VARIABLE"
+# target = "TODO"
+
+# Off: @Inject(INVOKE) on Minecraft.<init> (MinecraftMixin.beforeInitialResourceReload)
+#   No Horizon function mapped for Minecraft.<init> (run `match`, or map it in a --mappings file).
+# [[injection]]
+# id = "minecraft-mixin-before-initial-resource-reload"
+# kind = "BEFORE_CALL"
+# target = "TODO"
+
+# Off: @Inject(HEAD) on Minecraft.updateLevelInEngines (MinecraftMixin.updateLevelInEngines)
+#   No Horizon function mapped for Minecraft.updateLevelInEngines (run `match`, or map it in a --mappings file).
+# [[injection]]
+# id = "minecraft-mixin-update-level-in-engines"
+# kind = "HEAD"
+# target = "TODO"
+
+# Off: @Inject(HEAD) on Options.load (OptionsMixin.beforeLoad)
+#   No Horizon function mapped for Options.load (run `match`, or map it in a --mappings file).
+# [[injection]]
+# id = "options-mixin-before-load"
+# kind = "HEAD"
+# target = "TODO"
+
+# Off: @Inject(RETURN) on Options.load (OptionsMixin.afterLoad)
+#   No Horizon function mapped for Options.load (run `match`, or map it in a --mappings file).
+# [[injection]]
+# id = "options-mixin-after-load"
+# kind = "RETURN"
+# target = "TODO"
+
+# Off: @Inject(TAIL) on Options.processOptions (OptionsMixin.processJeiModifiers)
+#   No Horizon function mapped for Options.processOptions (run `match`, or map it in a --mappings file).
+# [[injection]]
+# id = "options-mixin-process-jei-modifiers"
+# kind = "RETURN"
+# target = "TODO"
+
+# Off: @Inject(INVOKE) on Screen.extractRenderStateWithTooltipAndSubtitles (ScreenMixin.drawBackground)
+#   No Horizon function mapped for Screen.extractRenderStateWithTooltipAndSubtitles (run `match`, or map it in a --mappings file).
+# [[injection]]
+# id = "screen-mixin-draw-background"
+# kind = "AFTER_CALL"
+# target = "TODO"
+
+# Off: @Inject(INVOKE) on Screen.extractRenderStateWithTooltipAndSubtitles (ScreenMixin.drawForeground)
+#   No Horizon function mapped for Screen.extractRenderStateWithTooltipAndSubtitles (run `match`, or map it in a --mappings file).
+# [[injection]]
+# id = "screen-mixin-draw-foreground"
+# kind = "AFTER_CALL"
+# target = "TODO"
